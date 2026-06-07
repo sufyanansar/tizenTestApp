@@ -13,11 +13,13 @@
       background: #000;
       color: #fff;
       font-family: Arial, sans-serif;
+      cursor: default;
     }
     iframe, webview {
       width: 100%;
       height: 100%;
       border: 0;
+      pointer-events: all;
     }
     .message {
       display: flex;
@@ -33,10 +35,39 @@
 <body>
   <iframe id="youtubeFrame" src="https://example.com/" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
   <script>
+    // Register remote keys
+    if (window.tizen && tizen.tvinputdevice) {
+      tizen.tvinputdevice.registerKey('Back');
+      tizen.tvinputdevice.registerKey('MousePointer');
+    }
+
+    // Handle remote back button (key code 10009)
+    document.addEventListener('keydown', function (e) {
+      if (e.keyCode === 10009) {
+        var frame = document.getElementById('youtubeFrame');
+        try {
+          // Try to go back inside the iframe first
+          frame.contentWindow.history.back();
+        } catch (err) {
+          // If no history or cross-origin, exit the app
+          if (window.tizen) {
+            tizen.application.getCurrentApplication().exit();
+          }
+        }
+      }
+    });
+
+    // Enable mouse pointer mode on Samsung remotes
+    if (window.tizen && tizen.tvwindow) {
+      try {
+        tizen.tvwindow.setScreenSaverMode('NONE');
+      } catch (err) {}
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
       var frame = document.getElementById('youtubeFrame');
       frame.addEventListener('error', function () {
-        document.body.innerHTML = '<div class="message">Unable to load YouTube directly in the iframe. If your Tizen device supports native webviews, replace the iframe with a <code>&lt;webview&gt;</code> element or launch the browser.</div>';
+        document.body.innerHTML = '<div class="message">Unable to load the page in the iframe. If your Tizen device supports native webviews, replace the iframe with a <code>&lt;webview&gt;</code> element or launch the browser.</div>';
       });
     });
   </script>

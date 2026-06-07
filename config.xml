@@ -6,4 +6,6 @@
   <author email="dev@example.com" href="https://example.com">Tizen Dev</author>
   <access origin="https://example.com" subdomains="true"/>
   <tizen:privilege name="http://tizen.org/privilege/internet"/>
+  <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+  <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
 </widget>
