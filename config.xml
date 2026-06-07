@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget id="com.example.youtubeapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets">
+  <tizen:application id="com.example.youtubeapp" package="com.example.youtubeapp" required_version="6.0"/>
+  <content src="index.html"/>
+  <name>YouTube App</name>
+  <author email="dev@example.com" href="https://example.com">Tizen Dev</author>
+  <access origin="https://example.com" subdomains="true"/>
+  <tizen:privilege name="http://tizen.org/privilege/internet"/>
+</widget>

@@ -1,0 +1,15 @@
+{
+  "name": "tizen-youtube-app",
+  "version": "1.0.0",
+  "description": "Tizen BREW web app that renders youtube.com",
+  "scripts": {
+    "start": "tizenbrew run",
+    "build": "tizenbrew package"
+  },
+  "tizenbrew": {
+    "type": "web",
+    "main": "index.html",
+    "id": "com.example.youtubeapp",
+    "name": "YouTubeApp"
+  }
+}
